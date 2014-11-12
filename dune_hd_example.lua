@@ -7,13 +7,13 @@ local request = "http://192.168.0.1/cgi-bin/do?cmd=start_file_playback&media_url
 local picture = "";
 local worker = {};
 for port=1,4 do
-   	portState=devices.system["output" ..port.. "_state"];
-	  if (portState == "on")  then portState = 1 end;
-    if (portState == "off") or (portState == "starting") or (portState == "resetting") then portState = 0 end;
-    --if (portState == "starting") or (portState == "resetting") then return; end;
-    -- worker
-   	worker[port]=portState;
-    for key,value in pairs(worker) do picture = picture .. value; end
+   portState=devices.system["output" ..port.. "_state"];
+   if (portState == "on")  then portState = 1 end;
+   if (portState == "off") or (portState == "starting") or (portState == "resetting") then portState = 0 end;
+   --if (portState == "starting") or (portState == "resetting") then return; end;
+   -- worker
+   worker[port]=portState;
+   for key,value in pairs(worker) do picture = picture .. value; end
         -- logf("Port %d has state %s", port, tostring(portState));
 end
   
