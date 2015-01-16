@@ -3,6 +3,7 @@
 -- for the action to take effect).
 
 local device = "192.168.1.1" -- Change ping destination address here
+local timeoutSec = 15 -- ping timeout in seconds
 
 local function someOutletsOff()
     for port = 1, 4 do
@@ -18,7 +19,7 @@ local function pingResult(o)
         return
     else
         if o.success then
-            logf("ping %s OK, outlet %d is off, turning it on", device, port);
+            logf("ping %s OK, some outlets off, turning all on", device);
             for port = 1, 4 do
                 devices.system.SetOut{output=port, value=true};
             end
@@ -26,12 +27,12 @@ local function pingResult(o)
             return
         else
             -- try ping again
-            ping{address=device, callback=pingResult}
+            ping{address=device, timeout=timeoutSec, callback=pingResult}
         end
     end
 end
 
 if someOutletsOff() and not _G.pingActive then
-    ping{address=device, callback=pingResult}
+    ping{address=device, timeout=timeoutSec, callback=pingResult}
     _G.pingActive = true
 end
