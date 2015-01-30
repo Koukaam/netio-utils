@@ -93,14 +93,11 @@ class Netio(object):
     def setVariables(self, newValues):
         XmlConnection.sendOne(self, SetVariables(newValues))
 
-def printUsage():
-    print('use as:')
-    print('    system.py <address> <username> <password> get <variable> [<variable> ...]')
-    print('    system.py <address> <username> <password> set <variable> <value> [<variable> <value> ...]')
-
 if __name__ == '__main__':
     if len(sys.argv) < 6:
-        printUsage()
+        print('use as:')
+        print('    system.py <address> <username> <password> get <variable> [<variable> ...]')
+        print('    system.py <address> <username> <password> set <variable>=<value> [<variable>=<value> ...]')
         raise Exception('not enough arguments')
     
     box = Netio(*sys.argv[1:4])
