@@ -28,12 +28,12 @@ class Logout(BaseRequest):
 class GetVariables(BaseRequest):
     def __init__(self, variables):
         """ get values of variables given in the list """
-        self.inner = '<system action="get">%s</device>' % ''.join(['<%s/>' % v for v in variables])
+        self.inner = '<system action="get">%s</system>' % ''.join(['<%s/>' % v for v in variables])
     
 class SetVariables(BaseRequest):
     def __init__(self, newValues):
         """ set values of variables given in the list """
-        self.inner = '<system action="set">%s</device>' % ''.join(['<%s>%s</%s>' % (k, escape(v), k) for k, v in newValues.items()])
+        self.inner = '<system action="set">%s</system>' % ''.join(['<%s>%s</%s>' % (k, escape(v), k) for k, v in newValues.items()])
 
 class XmlConnection(object):
     sessionId = None
