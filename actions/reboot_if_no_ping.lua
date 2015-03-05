@@ -5,10 +5,10 @@ local device = "192.168.10.1" -- Change ping destination address here
 
 local function pingAndReboot(o)
 	if o.success then
-    log("PING OK, target: " .. device .. ", " .. o.duration .. "ms"); 	
-  else
-    log("PING FAIL, target: " .. device .. ", " .. o.errorInfo);
-	  devices.system.Reboot{}; -- reboot if no ping
+  		log("PING OK, target: " .. device .. ", " .. o.duration .. "ms"); 	
+  	else
+    		log("PING FAIL, target: " .. device .. ", " .. o.errorInfo);
+	  	devices.system.Reboot{}; -- reboot if no ping
  	end
 end
 
